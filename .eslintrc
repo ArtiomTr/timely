@@ -11,7 +11,9 @@
         "plugin:prettier/recommended",
         "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended"
     ],
     "rules": {
         "@typescript-eslint/no-namespace": "off",
@@ -21,6 +23,7 @@
         "@typescript-eslint/no-non-null-assertion": "off",
         "@typescript-eslint/ban-types": "off",
         "no-console": "warn",
+        "react/prop-types": "off",
         "prettier/prettier": [
             "error",
             {

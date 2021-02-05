@@ -17,7 +17,7 @@ export const CalendarCell = ({ day, monthDaysCount, today, activity }: CalendarC
         {day > 0 && day <= monthDaysCount && (
             <div className={clsx(classes["cell"], day === today && classes["cell-today"])}>
                 <div
-                    className={classes["day__number"]}
+                    className={classes["cell__number"]}
                     style={{
                         backgroundColor: transitionColor(
                             { r: 74, g: 74, b: 74 },

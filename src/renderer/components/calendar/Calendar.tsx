@@ -25,8 +25,6 @@ export const Calendar = () => {
 
     const weekCount = Math.ceil((firstDayOfMonth + dayCount) / 7);
 
-    console.log(firstDayOfMonth);
-
     const nextMonth = useCallback(() => {
         setMonthBegginging((old) => moment(old).add(1, "month").toDate());
     }, []);
@@ -63,6 +61,7 @@ export const Calendar = () => {
                         <tr key={week}>
                             {new Array(7).fill(0).map((_, weekday) => (
                                 <CalendarCell
+                                    key={weekday}
                                     day={toMonthDay(week, weekday, firstDayOfMonth)}
                                     monthDaysCount={dayCount}
                                     today={today}
