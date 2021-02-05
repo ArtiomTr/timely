@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 import { Flex, Text, View } from "@adobe/react-spectrum";
-import {
-    HorizontalRuleIcon,
-    ScreenFullIcon,
-    ScreenNormalIcon,
-    XIcon,
-} from "@primer/octicons-react";
+import CloseIcon from "@spectrum-icons/workflow/Close";
+import MaximizeIcon from "@spectrum-icons/workflow/Maximize";
+import MinimizeIcon from "@spectrum-icons/workflow/Minimize";
+import RemoveIcon from "@spectrum-icons/workflow/Remove";
 
+import { MenuBarAction } from "./FrameAction";
 import styles from "./MenuBar.m.scss";
-import { MenuBarAction } from "./MenuBarAction";
 
 const closeWindow = () => {
     window.api.closeWindow();
@@ -41,18 +39,18 @@ export const MenuBar = () => {
             UNSAFE_className={styles["menu-bar"]}
         >
             <View></View>
-            <View>
+            <Flex justifyContent="center" alignItems="center">
                 <Text>Timely</Text>
-            </View>
+            </Flex>
             <View>
                 <MenuBarAction onClick={minimize}>
-                    <HorizontalRuleIcon />
+                    <RemoveIcon size="S" />
                 </MenuBarAction>
                 <MenuBarAction onClick={maximize}>
-                    {maximized ? <ScreenNormalIcon /> : <ScreenFullIcon />}
+                    {maximized ? <MinimizeIcon size="S" /> : <MaximizeIcon size="S" />}
                 </MenuBarAction>
                 <MenuBarAction onClick={closeWindow}>
-                    <XIcon />
+                    <CloseIcon size="S" />
                 </MenuBarAction>
             </View>
         </Flex>

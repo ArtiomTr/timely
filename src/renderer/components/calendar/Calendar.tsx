@@ -1,7 +1,8 @@
 import React, { useCallback, useState } from "react";
 
 import { ActionButton, Flex, Heading, Text } from "@adobe/react-spectrum";
-import { ArrowLeftIcon, ArrowRightIcon } from "@primer/octicons-react";
+import ChevronLeftIcon from "@spectrum-icons/workflow/ChevronLeft";
+import ChevronRightIcon from "@spectrum-icons/workflow/ChevronRight";
 import moment from "moment";
 
 import styles from "./Calendar.m.scss";
@@ -37,13 +38,13 @@ export const Calendar = () => {
         <React.Fragment>
             <Flex alignItems="center">
                 <ActionButton onPress={prevMonth}>
-                    <ArrowLeftIcon />
+                    <ChevronLeftIcon />
                 </ActionButton>
                 <Heading marginX="size-200" level={1}>
                     {moment(monthBegginging).format("YYYY MMMM")}
                 </Heading>
                 <ActionButton onPress={nextMonth}>
-                    <ArrowRightIcon />
+                    <ChevronRightIcon />
                 </ActionButton>
             </Flex>
             <table className={styles["calendar"]}>
