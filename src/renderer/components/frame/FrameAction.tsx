@@ -4,7 +4,7 @@ import clsx from "clsx";
 
 import styles from "./FrameAction.m.scss";
 
-export const MenuBarAction: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>> = ({
+export const FrameAction: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>> = ({
     children,
     className,
     ...other

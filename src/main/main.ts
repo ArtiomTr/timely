@@ -6,6 +6,8 @@ import url from "url";
 
 import { app, BrowserWindow, ipcMain } from "electron";
 
+import { loadInitialAppState } from "./loadInitialAppState";
+
 let mainWindow: Electron.BrowserWindow | null;
 
 const __DEV__ = process.env.NODE_ENV === "development";
@@ -62,6 +64,12 @@ function createWindow(): void {
     });
 }
 
+async function sendInitialAppState() {
+    const state = await loadInitialAppState();
+
+    mainWindow!.webContents.send("loadInitialAppState", state);
+}
+
 app.on("ready", createWindow);
 
 app.on("window-all-closed", () => {
@@ -91,3 +99,5 @@ ipcMain.on("window.toggleMaximize", () => {
 ipcMain.on("window.minimize", () => {
     mainWindow?.minimize();
 });
+
+ipcMain.on("requestInitialAppState", sendInitialAppState);

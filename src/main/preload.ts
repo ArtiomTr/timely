@@ -15,6 +15,10 @@ const api: Api = {
     subscribeToMaximize: (observer) => {
         ipcRenderer.on("window.maximizeChanged", (_, isMaximized) => observer(isMaximized));
     },
+    loadInitialAppState: (onload) => {
+        ipcRenderer.on("loadInitialAppState", (_, state) => onload(state));
+        ipcRenderer.send("requestInitialAppState");
+    },
 };
 
 contextBridge.exposeInMainWorld(

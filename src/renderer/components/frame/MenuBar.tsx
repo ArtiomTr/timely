@@ -6,8 +6,10 @@ import MaximizeIcon from "@spectrum-icons/workflow/Maximize";
 import MinimizeIcon from "@spectrum-icons/workflow/Minimize";
 import RemoveIcon from "@spectrum-icons/workflow/Remove";
 
-import { MenuBarAction } from "./FrameAction";
+import { FrameAction } from "./FrameAction";
+import { Logo } from "./Logo";
 import styles from "./MenuBar.m.scss";
+import { MenuBarActions } from "./MenuBarActions";
 
 const closeWindow = () => {
     window.api.closeWindow();
@@ -21,7 +23,11 @@ const minimize = () => {
     window.api.minimize();
 };
 
-export const MenuBar = () => {
+export type MenuBarProps = {
+    appTitle: string;
+};
+
+export const MenuBar = ({ appTitle }: MenuBarProps) => {
     const [maximized, setMaximized] = useState(false);
 
     useEffect(() => {
@@ -38,20 +44,23 @@ export const MenuBar = () => {
             justifyContent="space-between"
             UNSAFE_className={styles["menu-bar"]}
         >
-            <View></View>
+            <Flex>
+                <Logo />
+                <MenuBarActions />
+            </Flex>
             <Flex justifyContent="center" alignItems="center">
-                <Text>Timely</Text>
+                <Text>{appTitle}</Text>
             </Flex>
             <View>
-                <MenuBarAction onClick={minimize}>
+                <FrameAction onClick={minimize}>
                     <RemoveIcon size="S" />
-                </MenuBarAction>
-                <MenuBarAction onClick={maximize}>
+                </FrameAction>
+                <FrameAction onClick={maximize}>
                     {maximized ? <MinimizeIcon size="S" /> : <MaximizeIcon size="S" />}
-                </MenuBarAction>
-                <MenuBarAction onClick={closeWindow}>
+                </FrameAction>
+                <FrameAction onClick={closeWindow}>
                     <CloseIcon size="S" />
-                </MenuBarAction>
+                </FrameAction>
             </View>
         </Flex>
     );
