@@ -48,10 +48,11 @@
     },
     "dependencies": {
         "@adobe/react-spectrum": "^3.7.0",
-        "@primer/octicons-react": "^11.3.0",
+        "@spectrum-icons/workflow": "^3.2.0",
         "clsx": "^1.1.1",
         "moment": "^2.29.1",
         "react": "^16.8.0",
-        "react-dom": "^16.8.0"
+        "react-dom": "^16.8.0",
+        "tiny-invariant": "^1.1.0"
     }
 }

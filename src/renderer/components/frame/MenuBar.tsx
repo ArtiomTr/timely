@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 
 import { Flex, Text, View } from "@adobe/react-spectrum";
-import {
-    HorizontalRuleIcon,
-    ScreenFullIcon,
-    ScreenNormalIcon,
-    XIcon,
-} from "@primer/octicons-react";
+import CloseIcon from "@spectrum-icons/workflow/Close";
+import MaximizeIcon from "@spectrum-icons/workflow/Maximize";
+import MinimizeIcon from "@spectrum-icons/workflow/Minimize";
+import RemoveIcon from "@spectrum-icons/workflow/Remove";
 
+import { FrameAction } from "./FrameAction";
+import { Logo } from "./Logo";
 import styles from "./MenuBar.m.scss";
-import { MenuBarAction } from "./MenuBarAction";
+import { MenuBarActions } from "./MenuBarActions";
 
 const closeWindow = () => {
     window.api.closeWindow();
@@ -23,7 +23,11 @@ const minimize = () => {
     window.api.minimize();
 };
 
-export const MenuBar = () => {
+export type MenuBarProps = {
+    appTitle: string;
+};
+
+export const MenuBar = ({ appTitle }: MenuBarProps) => {
     const [maximized, setMaximized] = useState(false);
 
     useEffect(() => {
@@ -40,20 +44,23 @@ export const MenuBar = () => {
             justifyContent="space-between"
             UNSAFE_className={styles["menu-bar"]}
         >
-            <View></View>
+            <Flex>
+                <Logo />
+                <MenuBarActions />
+            </Flex>
+            <Flex justifyContent="center" alignItems="center">
+                <Text>{appTitle}</Text>
+            </Flex>
             <View>
-                <Text>Timely</Text>
-            </View>
-            <View>
-                <MenuBarAction onClick={minimize}>
-                    <HorizontalRuleIcon />
-                </MenuBarAction>
-                <MenuBarAction onClick={maximize}>
-                    {maximized ? <ScreenNormalIcon /> : <ScreenFullIcon />}
-                </MenuBarAction>
-                <MenuBarAction onClick={closeWindow}>
-                    <XIcon />
-                </MenuBarAction>
+                <FrameAction onClick={minimize}>
+                    <RemoveIcon size="S" />
+                </FrameAction>
+                <FrameAction onClick={maximize}>
+                    {maximized ? <MinimizeIcon size="S" /> : <MaximizeIcon size="S" />}
+                </FrameAction>
+                <FrameAction onClick={closeWindow}>
+                    <CloseIcon size="S" />
+                </FrameAction>
             </View>
         </Flex>
     );

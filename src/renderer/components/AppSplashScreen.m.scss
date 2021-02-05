@@ -1,0 +1,14 @@
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    clip-path: circle(300%);
+    pointer-events: none;
+    transition: clip-path 1s var(--spectrum-global-animation-ease-in-out);
+    &_loaded {
+        clip-path: circle(0%);
+    }
+}
