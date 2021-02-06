@@ -16,7 +16,7 @@ export const Frame: React.FC = ({ children }) => {
     return (
         <Grid
             areas={["header header", "sidebar content"]}
-            columns={["size-600", "auto"]}
+            columns={["size-800", "auto"]}
             rows={["size-400", "auto"]}
             height="100vh"
         >

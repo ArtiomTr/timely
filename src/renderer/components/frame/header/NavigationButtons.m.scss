@@ -1,0 +1,18 @@
+.action {
+    -webkit-app-region: no-drag;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: inherit;
+    cursor: pointer;
+    &:disabled {
+        color: var(--spectrum-alias-text-color-disabled);
+        cursor: default;
+    }
+    &:not(:disabled) {
+        &:hover {
+            color: var(--spectrum-alias-text-color-hover);
+        }
+    }
+}

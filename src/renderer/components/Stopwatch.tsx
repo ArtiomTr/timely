@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useReducer, useRef, useState } from "react";
+import React, { useCallback, useEffect, useReducer, useRef } from "react";
 
-import { ActionButton, Flex, Text, View } from "@adobe/react-spectrum";
+import { ActionButton, Flex, Text } from "@adobe/react-spectrum";
 import Pause from "@spectrum-icons/workflow/Pause";
 import Play from "@spectrum-icons/workflow/Play";
 import moment from "moment-timezone";
@@ -24,7 +24,8 @@ export const Stopwatch = () => {
     }, []);
 
     useEffect(() => {
-        setInterval(forceUpdate, 105);
+        const interval = setInterval(forceUpdate, 105);
+        return () => clearInterval(interval);
     }, []);
 
     return (

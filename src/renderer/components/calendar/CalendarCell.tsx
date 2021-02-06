@@ -4,10 +4,13 @@ import { Tooltip } from "@adobe/react-spectrum";
 import clsx from "clsx";
 
 import classes from "./CalendarCell.m.scss";
+import { DayRouteID } from "../routes/DayRoute";
+import { Link } from "../routing/Link";
 import { transitionColor } from "../utils/transitionColor";
 
 export type CalendarCellProps = {
-    day: number;
+    day: Date;
+    dayIndex: number;
     monthDaysCount: number;
     today: number;
     activity: number;
@@ -17,31 +20,45 @@ const msInHours = 60 * 60 * 1000;
 
 const clamp01 = (value: number) => (value < 0 ? 0 : value > 1 ? 1 : value);
 
-export const CalendarCell = ({ day, monthDaysCount, today, activity }: CalendarCellProps) => {
+export const CalendarCell = ({
+    dayIndex,
+    day,
+    monthDaysCount,
+    today,
+    activity,
+}: CalendarCellProps) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
         <td>
-            {day > 0 && day <= monthDaysCount && (
+            {dayIndex > 0 && dayIndex <= monthDaysCount && (
                 <div style={{ position: "relative" }}>
-                    <div
-                        onMouseEnter={() => setIsOpen(true)}
-                        onMouseLeave={() => setIsOpen(false)}
-                        className={clsx(classes["cell"], day === today && classes["cell-today"])}
-                    >
-                        <div
-                            className={classes["cell__number"]}
-                            style={{
-                                backgroundColor: transitionColor(
-                                    { r: 74, g: 74, b: 74 },
-                                    { r: 22, g: 135, b: 140 },
-                                    clamp01(activity / (8 * msInHours))
-                                ),
-                            }}
-                        >
-                            {day}
-                        </div>
-                    </div>
+                    <Link to={{ id: DayRouteID, parameters: { day } }}>
+                        {(onClick) => (
+                            <div
+                                onClick={onClick}
+                                onMouseEnter={() => setIsOpen(true)}
+                                onMouseLeave={() => setIsOpen(false)}
+                                className={clsx(
+                                    classes["cell"],
+                                    dayIndex === today && classes["cell-today"]
+                                )}
+                            >
+                                <div
+                                    className={classes["cell__number"]}
+                                    style={{
+                                        backgroundColor: transitionColor(
+                                            { r: 74, g: 74, b: 74 },
+                                            { r: 22, g: 135, b: 140 },
+                                            clamp01(activity / (8 * msInHours))
+                                        ),
+                                    }}
+                                >
+                                    {dayIndex}
+                                </div>
+                            </div>
+                        )}
+                    </Link>
                     <Tooltip
                         placement="bottom"
                         isOpen={isOpen}

@@ -10,6 +10,7 @@ import { FrameAction } from "./FrameAction";
 import { Logo } from "./Logo";
 import styles from "./MenuBar.m.scss";
 import { MenuBarActions } from "./MenuBarActions";
+import { NavigationButtons } from "./NavigationButtons";
 
 const closeWindow = () => {
     window.api.closeWindow();
@@ -45,6 +46,7 @@ export const MenuBar = ({ appTitle }: MenuBarProps) => {
             UNSAFE_className={styles["menu-bar"]}
         >
             <Flex>
+                <NavigationButtons />
                 <Logo />
                 <MenuBarActions />
             </Flex>

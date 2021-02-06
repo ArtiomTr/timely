@@ -60,15 +60,23 @@ export const Calendar = () => {
                 <tbody className={styles["calendar-body"]}>
                     {new Array(weekCount).fill(0).map((_, week) => (
                         <tr key={week}>
-                            {new Array(7).fill(0).map((_, weekday) => (
-                                <CalendarCell
-                                    key={weekday}
-                                    day={toMonthDay(week, weekday, firstDayOfMonth)}
-                                    monthDaysCount={dayCount}
-                                    today={today}
-                                    activity={Math.random() * 8 * 60 * 60 * 1000}
-                                />
-                            ))}
+                            {new Array(7).fill(0).map((_, weekday) => {
+                                const dayIndex = toMonthDay(week, weekday, firstDayOfMonth);
+
+                                return (
+                                    <CalendarCell
+                                        key={weekday}
+                                        day={moment(monthBegginging)
+                                            .startOf("month")
+                                            .add(dayIndex - 1, "days")
+                                            .toDate()}
+                                        dayIndex={dayIndex}
+                                        monthDaysCount={dayCount}
+                                        today={today}
+                                        activity={Math.random() * 8 * 60 * 60 * 1000}
+                                    />
+                                );
+                            })}
                         </tr>
                     ))}
                 </tbody>
