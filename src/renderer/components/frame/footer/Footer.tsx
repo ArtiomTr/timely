@@ -11,13 +11,19 @@ import { useStopwatchContext } from "../../StopwatchContext";
 import { StopwatchTime } from "../../StopwatchTime";
 
 export const Footer = () => {
-    const { begin, toggle } = useStopwatchContext();
+    const { begin, start, stop } = useStopwatchContext();
 
     return (
         <Flex height="100%">
-            <button onClick={toggle} className={classes["stopwatch"]}>
-                {begin === undefined ? <Stopwatch size="S" /> : <Pause size="S" />}
-            </button>
+            {begin === undefined ? (
+                <button onClick={start} className={classes["stopwatch"]}>
+                    <Stopwatch size="S" />
+                </button>
+            ) : (
+                <button onClick={stop} className={classes["stopwatch"]}>
+                    <Pause size="S" />
+                </button>
+            )}
             <Link to={CalendarRouteID}>
                 {(onClick) => (
                     <div onClick={onClick} className={classes["stopwatch-time"]}>

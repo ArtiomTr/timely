@@ -45,7 +45,7 @@ export const DayForm = ({ initial, day }: DayFormProps) => {
         <FormikProvider value={formikBag}>
             <Form>
                 <Flex direction="column" justifyContent="start">
-                    <HoursField isDisabled={!isEditing} name="hours" label="Working time" />
+                    <HoursField isDisabled={!isEditing} name="ms" label="Working time" />
                     <TextAreaField isDisabled={!isEditing} name="description" label="Description" />
                     <View marginTop="size-150">
                         {isEditing ? (

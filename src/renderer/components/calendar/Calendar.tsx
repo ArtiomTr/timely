@@ -81,7 +81,7 @@ export const Calendar = () => {
                                         dayIndex={dayIndex}
                                         monthDaysCount={dayCount}
                                         today={today}
-                                        activity={project?.activityMap![dateToDay(day)].hours || 0}
+                                        activity={project?.activityMap![dateToDay(day)].ms || 0}
                                     />
                                 );
                             })}

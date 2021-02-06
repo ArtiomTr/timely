@@ -1,45 +1,27 @@
 import { contextBridge, ipcRenderer } from "electron";
 
-import type { Api } from "src/shared/api";
+import type { Api, DayActivity } from "src/shared/api";
 
 const api: Api = {
     closeWindow: () => {
-        ipcRenderer.send("window.close");
+        ipcRenderer.send("close");
     },
     toggleMaximize: () => {
-        ipcRenderer.send("window.toggleMaximize");
+        ipcRenderer.send("toggleMaximize");
     },
     minimize: () => {
-        ipcRenderer.send("window.minimize");
+        ipcRenderer.send("minimize");
     },
     subscribeToMaximize: (observer) => {
-        ipcRenderer.on("window.maximizeChanged", (_, isMaximized) => observer(isMaximized));
+        ipcRenderer.on("onMaximized", (_, isMaximized) => observer(isMaximized));
     },
     loadInitialAppState: (onload) => {
         ipcRenderer.on("loadInitialAppState", (_, state) => onload(state));
         ipcRenderer.send("requestInitialAppState");
     },
+    setDayActivity: (day: number, activity: DayActivity) => {
+        ipcRenderer.send("setDayActivity", day, activity);
+    },
 };
 
-contextBridge.exposeInMainWorld(
-    "api",
-    api
-    // {
-    //   closeWindow: () => {},
-
-    //   // send: (channel, data) => {
-    //   //   // whitelist channels
-    //   //   let validChannels = ["toMain"];
-    //   //   if (validChannels.includes(channel)) {
-    //   //     ipcRenderer.send(channel, data);
-    //   //   }
-    //   // },
-    //   // receive: (channel, func) => {
-    //   //   let validChannels = ["fromMain"];
-    //   //   if (validChannels.includes(channel)) {
-    //   //     // Deliberately strip event as it includes `sender`
-    //   //     ipcRenderer.on(channel, (event, ...args) => func(...args));
-    //   //   }
-    //   // },
-    // }
-);
+contextBridge.exposeInMainWorld("api", api);

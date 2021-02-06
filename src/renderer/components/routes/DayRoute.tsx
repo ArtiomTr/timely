@@ -44,7 +44,7 @@ export const DayRoute = ({ parameters }: DayRouteProps) => {
                 day={dayIndex}
                 initial={
                     savedActivity || {
-                        hours: +(isToday && totalTime.current + msFromPoint(begin)),
+                        ms: +(isToday && totalTime.current + msFromPoint(begin)),
                         description: "",
                     }
                 }

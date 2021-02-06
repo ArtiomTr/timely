@@ -8,13 +8,19 @@ import { useStopwatchContext } from "./StopwatchContext";
 import { StopwatchTime } from "./StopwatchTime";
 
 export const Stopwatch = () => {
-    const { toggle, begin } = useStopwatchContext();
+    const { start, stop, begin } = useStopwatchContext();
 
     return (
         <Flex alignItems="center">
-            <ActionButton onPress={toggle}>
-                {begin !== undefined ? <Pause /> : <Play />}
-            </ActionButton>
+            {begin !== undefined ? (
+                <ActionButton onPress={stop}>
+                    <Pause />
+                </ActionButton>
+            ) : (
+                <ActionButton onPress={start}>
+                    <Play />
+                </ActionButton>
+            )}
             <Text marginX="size-100">
                 <StopwatchTime />
             </Text>
