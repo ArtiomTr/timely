@@ -2,7 +2,8 @@ import React from "react";
 
 import { Grid, View } from "@adobe/react-spectrum";
 
-import { MenuBar } from "./MenuBar";
+import { MenuBar } from "./header/MenuBar";
+import { Sidebar } from "./sidebar/Sidebar";
 import { useAppContext } from "../AppContext";
 
 export const Frame: React.FC = ({ children }) => {
@@ -14,11 +15,14 @@ export const Frame: React.FC = ({ children }) => {
 
     return (
         <Grid
-            areas={["header", "content"]}
+            areas={["header header", "sidebar content"]}
+            columns={["size-600", "auto"]}
             rows={["size-400", "auto"]}
             height="100vh"
-            gap="size-100"
         >
+            <View gridArea="sidebar" backgroundColor="gray-75">
+                <Sidebar />
+            </View>
             <View borderBottomColor="seafoam-400" borderBottomWidth="thin" gridArea="header">
                 <MenuBar appTitle={appTitle} />
             </View>

@@ -10,7 +10,7 @@ export const loadInitialAppState = (): Promise<AppState> => {
                         title: "Test",
                     },
                 }),
-            1000
+            10
         )
     );
 };

@@ -66,7 +66,7 @@ export const Calendar = () => {
                                     day={toMonthDay(week, weekday, firstDayOfMonth)}
                                     monthDaysCount={dayCount}
                                     today={today}
-                                    activity={Math.random()}
+                                    activity={Math.random() * 8 * 60 * 60 * 1000}
                                 />
                             ))}
                         </tr>
