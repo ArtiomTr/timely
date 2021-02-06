@@ -5,8 +5,9 @@ import { useSafeContext } from "./utils/useSafeContext";
 
 type StopwatchContextType = {
     begin: Date | undefined;
-    totalTime: number;
+    totalTime: Readonly<React.MutableRefObject<number>>;
     toggle: () => void;
+    setTotalTime: (time: number) => void;
 };
 
 const StopwatchContext = createContext<StopwatchContextType | undefined>(undefined);
@@ -29,12 +30,15 @@ export const StopwatchProvider: React.FC = ({ children }) => {
         });
     }, []);
 
+    const setTotalTime = useCallback((time: number) => (totalTime.current = time), []);
+
     return (
         <StopwatchContext.Provider
             value={{
                 begin: begin,
-                totalTime: totalTime.current,
+                totalTime,
                 toggle,
+                setTotalTime,
             }}
         >
             {children}

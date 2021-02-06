@@ -10,6 +10,7 @@ export type AppConfig = {};
 
 export type Project = {
     title: string;
+    activityMap: Record<number, number>;
 };
 
 export type AppState = {

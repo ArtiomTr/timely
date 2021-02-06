@@ -15,7 +15,7 @@ export const App = () => (
     <Provider theme={darkTheme}>
         <AppContextProvider>
             <StopwatchProvider>
-                <Router defaultRoute={CalendarRouteID}>
+                <Router defaultRoute={DayRouteID}>
                     <Frame>
                         <View paddingX={20} paddingY={10}>
                             <Route id={CalendarRouteID} component={CalendarRoute} />

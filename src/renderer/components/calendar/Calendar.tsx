@@ -7,6 +7,8 @@ import moment from "moment";
 
 import styles from "./Calendar.m.scss";
 import { CalendarCell } from "./CalendarCell";
+import { useAppContext } from "../AppContext";
+import { dateToDay } from "../utils/dateToDay";
 import { toMonthDay } from "../utils/toMonthDay";
 
 const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -33,6 +35,8 @@ export const Calendar = () => {
     const prevMonth = useCallback(() => {
         setMonthBegginging((old) => moment(old).subtract(1, "month").toDate());
     }, []);
+
+    const { project } = useAppContext();
 
     return (
         <React.Fragment>
@@ -63,17 +67,19 @@ export const Calendar = () => {
                             {new Array(7).fill(0).map((_, weekday) => {
                                 const dayIndex = toMonthDay(week, weekday, firstDayOfMonth);
 
+                                const day = moment(monthBegginging)
+                                    .startOf("month")
+                                    .add(dayIndex - 1, "days")
+                                    .toDate();
+
                                 return (
                                     <CalendarCell
                                         key={weekday}
-                                        day={moment(monthBegginging)
-                                            .startOf("month")
-                                            .add(dayIndex - 1, "days")
-                                            .toDate()}
+                                        day={day}
                                         dayIndex={dayIndex}
                                         monthDaysCount={dayCount}
                                         today={today}
-                                        activity={Math.random() * 8 * 60 * 60 * 1000}
+                                        activity={project?.activityMap![dateToDay(day)] || 0}
                                     />
                                 );
                             })}

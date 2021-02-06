@@ -17,9 +17,9 @@ export const StopwatchTime = () => {
 
     return (
         <React.Fragment>
-            {moment(msFromPoint(begin) + totalTime)
+            {moment(msFromPoint(begin) + totalTime.current)
                 .tz("utc")
-                .format("HH:mm:ss:SS")}
+                .format("HH:mm:ss.SS")}
         </React.Fragment>
     );
 };

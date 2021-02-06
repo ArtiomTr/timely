@@ -6,6 +6,8 @@ import clsx from "clsx";
 import classes from "./CalendarCell.m.scss";
 import { DayRouteID } from "../routes/DayRoute";
 import { Link } from "../routing/Link";
+import { clamp01 } from "../utils/clamp01";
+import { msToHours } from "../utils/msToHours";
 import { transitionColor } from "../utils/transitionColor";
 
 export type CalendarCellProps = {
@@ -16,10 +18,6 @@ export type CalendarCellProps = {
     activity: number;
 };
 
-const msInHours = 60 * 60 * 1000;
-
-const clamp01 = (value: number) => (value < 0 ? 0 : value > 1 ? 1 : value);
-
 export const CalendarCell = ({
     dayIndex,
     day,
@@ -28,6 +26,8 @@ export const CalendarCell = ({
     activity,
 }: CalendarCellProps) => {
     const [isOpen, setIsOpen] = useState(false);
+
+    const hours = msToHours(activity);
 
     return (
         <td>
@@ -50,7 +50,7 @@ export const CalendarCell = ({
                                         backgroundColor: transitionColor(
                                             { r: 74, g: 74, b: 74 },
                                             { r: 22, g: 135, b: 140 },
-                                            clamp01(activity / (8 * msInHours))
+                                            clamp01(hours / 8)
                                         ),
                                     }}
                                 >
@@ -70,7 +70,7 @@ export const CalendarCell = ({
                             transform: "translateX(-50%)",
                         }}
                     >
-                        Your activity was {Number((activity / msInHours).toFixed(1))} hour(-s).
+                        Your activity was {msToHours(activity)} hour(-s).
                     </Tooltip>
                 </div>
             )}

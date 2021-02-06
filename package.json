@@ -51,6 +51,7 @@
         "@adobe/react-spectrum": "^3.7.0",
         "@spectrum-icons/workflow": "^3.2.0",
         "clsx": "^1.1.1",
+        "formik": "^2.2.6",
         "lodash": "^4.17.20",
         "moment": "^2.29.1",
         "moment-timezone": "^0.5.32",
