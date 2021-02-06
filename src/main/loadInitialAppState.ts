@@ -20,7 +20,10 @@ export const loadInitialAppState = (): Promise<AppState> => {
                                         .getTime() /
                                         (24 * 60 * 60 * 1000)
                                 )
-                            ] = Math.random() * 8 * 60 * 60 * 1000;
+                            ] = {
+                                hours: Math.random() * 8 * 60 * 60 * 1000,
+                                description: "",
+                            };
                             return acc;
                         }, {}),
                     },

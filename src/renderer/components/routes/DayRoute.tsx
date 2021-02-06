@@ -1,11 +1,10 @@
 import React from "react";
 
 import { Heading, Text, View } from "@adobe/react-spectrum";
-import { Formik } from "formik";
 import moment from "moment";
 
 import { useAppContext } from "../AppContext";
-import { TogglableHoursField } from "../fields/TogglabeHoursField";
+import { DayForm } from "../forms/DayForm";
 import { useStopwatchContext } from "../StopwatchContext";
 import { dateToDay } from "../utils/dateToDay";
 import { msFromPoint } from "../utils/msFromPoint";
@@ -19,32 +18,37 @@ type DayRouteProps = {
 };
 
 export const DayRoute = ({ parameters }: DayRouteProps) => {
-    const { totalTime, begin, setTotalTime } = useStopwatchContext();
+    const { totalTime, begin } = useStopwatchContext();
 
-    const { project } = useAppContext();
+    const {
+        state: { project },
+    } = useAppContext();
 
     const isToday = parameters.day === undefined;
 
     const day = isToday ? moment(new Date()).startOf("day") : moment(parameters.day);
 
+    const dayIndex = dateToDay(day.toDate());
+
+    const savedActivity = project?.activityMap[dayIndex];
+
     return (
-        <Formik
-            initialValues={{
-                hours:
-                    (project?.activityMap[dateToDay(day.toDate())] || 0) +
-                    +(isToday && totalTime.current + msFromPoint(begin)),
-            }}
-            onSubmit={({ hours }) => setTotalTime(hours)}
-        >
-            <View>
-                <View marginBottom="size-300">
-                    <Heading marginBottom={0} level={1}>
-                        {day.format("MMMM Do")}
-                    </Heading>
-                    <Text>{day.format("YYYY.MM.DD")}</Text>
-                </View>
-                <TogglableHoursField name="hours" label="Working time" />
+        <View>
+            <View marginBottom="size-300">
+                <Heading marginBottom={0} level={1}>
+                    {day.format("MMMM Do")}
+                </Heading>
+                <Text>{day.format("YYYY.MM.DD")}</Text>
             </View>
-        </Formik>
+            <DayForm
+                day={dayIndex}
+                initial={
+                    savedActivity || {
+                        hours: +(isToday && totalTime.current + msFromPoint(begin)),
+                        description: "",
+                    }
+                }
+            />
+        </View>
     );
 };

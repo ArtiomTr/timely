@@ -2,10 +2,10 @@ import React from "react";
 
 import { TextField } from "@adobe/react-spectrum";
 
-import { TogglableField } from "./TogglableField";
+import { useFieldBase } from "./useFieldBase";
 import { hoursToMs, msToHours } from "../utils/msToHours";
 
-type TogglableHoursFieldProps = {
+type HoursFieldProps = {
     name: string;
 } & React.ComponentProps<typeof TextField>;
 
@@ -17,6 +17,8 @@ const stringToValue = (value: string) => {
 
 const valueToString = (value: number) => `${msToHours(value)} h`;
 
-export const TogglableHoursField = (props: TogglableHoursFieldProps) => (
-    <TogglableField stringToValue={stringToValue} valueToString={valueToString} {...props} />
-);
+export const HoursField = ({ name, ...other }: HoursFieldProps) => {
+    const { value, onChange, onBlur } = useFieldBase({ name, stringToValue, valueToString });
+
+    return <TextField {...other} value={value} onChange={onChange} onBlur={onBlur} />;
+};

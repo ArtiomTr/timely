@@ -36,7 +36,9 @@ export const Calendar = () => {
         setMonthBegginging((old) => moment(old).subtract(1, "month").toDate());
     }, []);
 
-    const { project } = useAppContext();
+    const {
+        state: { project },
+    } = useAppContext();
 
     return (
         <React.Fragment>
@@ -79,7 +81,7 @@ export const Calendar = () => {
                                         dayIndex={dayIndex}
                                         monthDaysCount={dayCount}
                                         today={today}
-                                        activity={project?.activityMap![dateToDay(day)] || 0}
+                                        activity={project?.activityMap![dateToDay(day)].hours || 0}
                                     />
                                 );
                             })}

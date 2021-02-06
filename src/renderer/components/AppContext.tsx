@@ -1,22 +1,27 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useEffect, useState } from "react";
 
-import { AppState } from "src/shared/api";
+import { AppState, DayActivity } from "src/shared/api";
 import { useSafeContext } from "./utils/useSafeContext";
 import { AppSplashScreen } from "./AppSplashScreen";
 
-const AppContext = createContext<AppState | undefined>(undefined);
+type AppContextType = {
+    state: AppState;
+    setDayActivity: (day: number, action: DayActivity) => void;
+};
+
+const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const useAppContext = () => useSafeContext(AppContext);
 
 export const AppContextProvider: React.FC = ({ children }) => {
-    const [appConfig, setAppConfig] = useState<AppState | undefined>(undefined);
+    const [appState, setAppState] = useState<AppState | undefined>(undefined);
 
     useEffect(() => {
         let _isMounted = true;
 
         window.api.loadInitialAppState((config) => {
             if (_isMounted) {
-                setAppConfig(config);
+                setAppState(config);
             }
         });
 
@@ -25,12 +30,28 @@ export const AppContextProvider: React.FC = ({ children }) => {
         };
     }, []);
 
+    const setDayActivity = useCallback(
+        (day: number, activity: DayActivity) =>
+            setAppState((state) => {
+                if (state === undefined || state.project === undefined) return state;
+
+                state.project.activityMap[day] = activity;
+
+                return {
+                    ...state,
+                };
+            }),
+        []
+    );
+
     return (
         <React.Fragment>
-            <AppSplashScreen isLoad={appConfig !== undefined} />
+            <AppSplashScreen isLoad={appState !== undefined} />
 
-            {appConfig !== undefined && (
-                <AppContext.Provider value={appConfig}>{children}</AppContext.Provider>
+            {appState !== undefined && (
+                <AppContext.Provider value={{ state: appState, setDayActivity }}>
+                    {children}
+                </AppContext.Provider>
             )}
         </React.Fragment>
     );

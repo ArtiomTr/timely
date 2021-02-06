@@ -8,9 +8,14 @@ export interface Api {
 
 export type AppConfig = {};
 
+export type DayActivity = {
+    hours: number;
+    description: string;
+};
+
 export type Project = {
     title: string;
-    activityMap: Record<number, number>;
+    activityMap: Record<number, DayActivity>;
 };
 
 export type AppState = {

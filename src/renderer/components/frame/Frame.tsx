@@ -8,9 +8,11 @@ import { Sidebar } from "./sidebar/Sidebar";
 import { useAppContext } from "../AppContext";
 
 export const Frame: React.FC = ({ children }) => {
-    const context = useAppContext();
+    const {
+        state: { project },
+    } = useAppContext();
 
-    const appTitle = context.project ? `Timely - ${context.project.title}` : `Timely`;
+    const appTitle = project ? `Timely - ${project.title}` : `Timely`;
 
     document.title = appTitle;
 

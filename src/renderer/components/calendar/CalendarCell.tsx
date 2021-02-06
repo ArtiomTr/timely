@@ -65,7 +65,7 @@ export const CalendarCell = ({
                         position="absolute"
                         left="50%"
                         zIndex={999}
-                        minWidth="size-2000"
+                        minWidth="size-1600"
                         UNSAFE_style={{
                             transform: "translateX(-50%)",
                         }}
