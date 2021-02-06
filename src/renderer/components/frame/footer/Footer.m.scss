@@ -1,0 +1,29 @@
+.stopwatch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-left: 10px;
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    &:active {
+        background-color: rgba(255, 255, 255, 0.15);
+    }
+}
+
+.stopwatch-time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 5px;
+    cursor: pointer;
+    user-select: none;
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    &:active {
+        background-color: rgba(255, 255, 255, 0.15);
+    }
+}

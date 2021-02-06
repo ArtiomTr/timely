@@ -1,19 +1,12 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-
-import invariant from "tiny-invariant";
+import React, { createContext, useEffect, useState } from "react";
 
 import { AppState } from "src/shared/api";
+import { useSafeContext } from "./utils/useSafeContext";
 import { AppSplashScreen } from "./AppSplashScreen";
 
 const AppContext = createContext<AppState | undefined>(undefined);
 
-export const useAppContext = () => {
-    const context = useContext(AppContext);
-
-    invariant(context, "Trying to access app context outside app context");
-
-    return context;
-};
+export const useAppContext = () => useSafeContext(AppContext);
 
 export const AppContextProvider: React.FC = ({ children }) => {
     const [appConfig, setAppConfig] = useState<AppState | undefined>(undefined);

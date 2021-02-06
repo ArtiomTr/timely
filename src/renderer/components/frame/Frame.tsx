@@ -2,6 +2,7 @@ import React from "react";
 
 import { Grid, View } from "@adobe/react-spectrum";
 
+import { Footer } from "./footer/Footer";
 import { MenuBar } from "./header/MenuBar";
 import { Sidebar } from "./sidebar/Sidebar";
 import { useAppContext } from "../AppContext";
@@ -15,9 +16,9 @@ export const Frame: React.FC = ({ children }) => {
 
     return (
         <Grid
-            areas={["header header", "sidebar content"]}
+            areas={["header header", "sidebar content", "footer footer"]}
             columns={["size-800", "auto"]}
-            rows={["size-400", "auto"]}
+            rows={["size-400", "auto", "size-300"]}
             height="100vh"
         >
             <View gridArea="sidebar" backgroundColor="gray-75">
@@ -26,7 +27,18 @@ export const Frame: React.FC = ({ children }) => {
             <View borderBottomColor="seafoam-400" borderBottomWidth="thin" gridArea="header">
                 <MenuBar appTitle={appTitle} />
             </View>
-            <View gridArea="content">{children}</View>
+            <View
+                UNSAFE_style={{
+                    overflowX: "hidden",
+                    overflowY: "auto",
+                }}
+                gridArea="content"
+            >
+                {children}
+            </View>
+            <View backgroundColor="gray-50" gridArea="footer">
+                <Footer />
+            </View>
         </Grid>
     );
 };
