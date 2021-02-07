@@ -13,7 +13,7 @@ const stringToValue = (value: string) => value;
 const valueToString = (value: string) => value;
 
 export const TextAreaField = ({ name, ...other }: TextAreaFieldProps) => {
-    const { value, onChange, onBlur } = useFieldBase({ name, stringToValue, valueToString });
+    const field = useFieldBase({ name, stringToValue, valueToString });
 
-    return <TextArea {...other} value={value} onChange={onChange} onBlur={onBlur} />;
+    return <TextArea {...other} {...field} />;
 };

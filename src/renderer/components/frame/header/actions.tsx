@@ -12,6 +12,7 @@ import Search from "@spectrum-icons/workflow/Search";
 import Settings from "@spectrum-icons/workflow/Settings";
 
 import { Action } from "./MenuBarAction";
+import { NewProjectID } from "../../forms/NewProjectForm";
 
 export const actions: Array<Action> = [
     {
@@ -23,9 +24,7 @@ export const actions: Array<Action> = [
                     {
                         title: "Create new project",
                         icon: <Add size="S" />,
-                        execute: () => {
-                            console.log("new project");
-                        },
+                        execute: () => window.openPopup(NewProjectID),
                     },
                     {
                         title: "Open project",

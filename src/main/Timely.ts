@@ -2,8 +2,10 @@ import { BrowserWindow } from "electron";
 import invariant from "tiny-invariant";
 
 import { close } from "./api/close";
+import { createProject } from "./api/createProject";
 import { minimize } from "./api/minimize";
 import { onMaximize } from "./api/onMaximize";
+import { pickFolder } from "./api/pickFolder";
 import { requestInitialAppState } from "./api/requestInitialAppState";
 import { setDayActivity } from "./api/setDayActivity";
 import { toggleMaximize } from "./api/toggleMaximize";
@@ -17,6 +19,8 @@ const apiFunctionInitializers = [
     requestInitialAppState,
     toggleMaximize,
     setDayActivity,
+    pickFolder,
+    createProject,
 ];
 
 export class Timely {

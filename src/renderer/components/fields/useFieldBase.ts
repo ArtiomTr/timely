@@ -8,8 +8,19 @@ export type FieldBaseProps<T> = {
     stringToValue: (str: string) => T;
 };
 
-export const useFieldBase = <T>({ name, valueToString, stringToValue }: FieldBaseProps<T>) => {
-    const [{ value }, , { setValue }] = useField({ name });
+type FieldBag = {
+    onChange: (value: string) => void;
+    onBlur: (e: React.FocusEvent) => void;
+    value: string;
+    validationState?: "invalid" | "valid";
+};
+
+export const useFieldBase = <T>({
+    name,
+    valueToString,
+    stringToValue,
+}: FieldBaseProps<T>): FieldBag => {
+    const [{ value }, { error, touched }, { setValue, setTouched }] = useField({ name });
 
     const [stringifiedValue, setStringifiedValue] = useState("");
 
@@ -20,13 +31,17 @@ export const useFieldBase = <T>({ name, valueToString, stringToValue }: FieldBas
     const onChange = useCallback((value: string) => setStringifiedValue(value), []);
 
     const onBlur = useCallback(
-        (e: React.FocusEvent<HTMLInputElement>) => setValue(stringToValue(e.target.value)),
-        [setValue, stringToValue]
+        (e: React.FocusEvent<HTMLInputElement>) => {
+            setValue(stringToValue(e.target.value));
+            setTouched(true);
+        },
+        [setValue, setTouched, stringToValue]
     );
 
     return {
         onChange,
         onBlur,
         value: stringifiedValue,
+        validationState: touched ? (error ? "invalid" : "valid") : undefined,
     };
 };

@@ -33,6 +33,9 @@ const createConfig = ({ entrypoint, output, target, plugins, isDev }) => ({
         port: 9000,
     },
     resolve: {
+        alias: {
+            src: path.join(__dirname, "src"),
+        },
         extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
     },
     module: {

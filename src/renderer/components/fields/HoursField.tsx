@@ -18,7 +18,7 @@ const stringToValue = (value: string) => {
 const valueToString = (value: number) => `${msToHours(value)} h`;
 
 export const HoursField = ({ name, ...other }: HoursFieldProps) => {
-    const { value, onChange, onBlur } = useFieldBase({ name, stringToValue, valueToString });
+    const field = useFieldBase({ name, stringToValue, valueToString });
 
-    return <TextField {...other} value={value} onChange={onChange} onBlur={onBlur} />;
+    return <TextField {...other} {...field} />;
 };

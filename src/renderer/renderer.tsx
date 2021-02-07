@@ -9,6 +9,7 @@ import { App } from "./components/App";
 declare global {
     interface Window {
         api: Api;
+        openPopup: (popupId: string) => void;
     }
 }
 

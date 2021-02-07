@@ -22,6 +22,19 @@ const api: Api = {
     setDayActivity: (day: number, activity: DayActivity) => {
         ipcRenderer.send("setDayActivity", day, activity);
     },
+    pickFolder: () => {
+        ipcRenderer.send("pickFolder");
+    },
+    subscribeToFolderPicken: (callback) => {
+        ipcRenderer.on("onFolderPicken", (_, folder) => callback(folder));
+    },
+    createProject: (folder, title) => {
+        ipcRenderer.send("createProject", folder, title);
+    },
+    subscribeToNotifications: (onSuccess, onError) => {
+        ipcRenderer.on("success", (_, type) => onSuccess(type));
+        ipcRenderer.on("error", (_, type, errorText) => onError(type, errorText));
+    },
 };
 
 contextBridge.exposeInMainWorld("api", api);
