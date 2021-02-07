@@ -45,23 +45,27 @@ export const NewProjectForm = () => {
 
     useEffect(() => {
         window.api.subscribeToFolderPicken((folder) => setFieldValue("folder", folder));
+    }, [setFieldValue]);
 
-        const errorCleanup = subscribeToError((type, error) => {
-            if (type === NotificationType.NEW_PROJECT) {
-                setFieldError("message", error);
-            }
-        });
-        const successCleanup = subscribeToSuccess((type) => {
-            if (type === NotificationType.NEW_PROJECT) {
-                dismiss();
-            }
-        });
+    useEffect(
+        () =>
+            subscribeToError((type, error) => {
+                if (type === NotificationType.NEW_PROJECT) {
+                    setFieldError("message", error);
+                }
+            }),
+        [setFieldError, subscribeToError]
+    );
 
-        return () => {
-            errorCleanup();
-            successCleanup();
-        };
-    }, [setFieldValue, setFieldError, subscribeToError, dismiss, subscribeToSuccess]);
+    useEffect(
+        () =>
+            subscribeToSuccess((type) => {
+                if (type === NotificationType.NEW_PROJECT) {
+                    dismiss();
+                }
+            }),
+        [dismiss, subscribeToSuccess]
+    );
 
     return (
         <DialogTrigger isOpen={isOpen}>
@@ -97,10 +101,10 @@ export const NewProjectForm = () => {
                             </Flex>
                         </Content>
                         <ButtonGroup>
-                            <Button variant="secondary" onPress={dismiss}>
+                            <Button variant="secondary" type="reset" onPress={dismiss}>
                                 Cancel
                             </Button>
-                            <Button variant="cta" type="submit" onPress={dismiss}>
+                            <Button variant="cta" type="submit">
                                 Create
                             </Button>
                         </ButtonGroup>

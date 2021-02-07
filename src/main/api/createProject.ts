@@ -3,7 +3,8 @@ import { join } from "path";
 
 import { ipcMain } from "electron";
 
-import { Timely } from "../Timely";
+import { NotificationType } from "src/shared/api";
+import type { Timely } from "../Timely";
 import { safeWriteFile } from "../utils/safeWriteFile";
 
 export const createProject = (timely: Timely) => {
@@ -19,9 +20,14 @@ export const createProject = (timely: Timely) => {
                     })
                 );
 
-                timely.window.webContents.send("success");
+                timely.getWindow().webContents.send("success", NotificationType.NEW_PROJECT);
+
+                timely.getProjectLoader().loadProject(timely, pathToProjectFile);
+                timely.setLastOpenedProject(pathToProjectFile);
             } else {
-                timely.window.webContents.send("error", "Path is not empty");
+                timely
+                    .getWindow()
+                    .webContents.send("error", NotificationType.NEW_PROJECT, "Path is not empty");
             }
         });
     });

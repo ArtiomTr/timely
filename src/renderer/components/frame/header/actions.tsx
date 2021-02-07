@@ -29,9 +29,7 @@ export const actions: Array<Action> = [
                     {
                         title: "Open project",
                         icon: <FolderOpen size="S" />,
-                        execute: () => {
-                            console.log("open");
-                        },
+                        execute: () => window.api.openProject(),
                     },
                 ],
             },

@@ -12,6 +12,8 @@ export interface Api {
         onSuccess: (type: NotificationType) => void,
         onError: (type: NotificationType, errorText: string) => void
     ) => void;
+    openProject: () => void;
+    onProjectLoad: (callback: (project: Project) => void) => void;
 }
 
 export type AppConfig = {
@@ -35,4 +37,5 @@ export type AppState = {
 
 export enum NotificationType {
     NEW_PROJECT,
+    GENERAL,
 }

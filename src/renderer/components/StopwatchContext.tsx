@@ -29,9 +29,11 @@ export const StopwatchProvider: React.FC = ({ children }) => {
         state: { project },
     } = useAppContext();
 
-    const totalTime = useRef(project?.activityMap[day].ms || 0);
+    const totalTime = useRef(project?.activityMap[day]?.ms || 0);
     const beginRef = useRef(begin);
     beginRef.current = begin;
+
+    totalTime.current = project?.activityMap[day]?.ms || 0;
 
     const stop = useCallback(() => {
         if (beginRef.current !== undefined) {

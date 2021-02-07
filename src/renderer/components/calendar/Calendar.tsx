@@ -20,7 +20,7 @@ export const Calendar = () => {
 
     const todayDate = moment(new Date());
 
-    const today = moment(monthBegginging).month() === todayDate.month() ? todayDate.day() : -1;
+    const today = moment(monthBegginging).month() === todayDate.month() ? todayDate.date() : -1;
 
     const firstDayOfMonth = enToNormal(moment(monthBegginging).startOf("month").get("weekday"));
 
@@ -81,7 +81,7 @@ export const Calendar = () => {
                                         dayIndex={dayIndex}
                                         monthDaysCount={dayCount}
                                         today={today}
-                                        activity={project?.activityMap![dateToDay(day)].ms || 0}
+                                        activity={project?.activityMap![dateToDay(day)]?.ms || 0}
                                     />
                                 );
                             })}

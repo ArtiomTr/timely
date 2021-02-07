@@ -28,6 +28,12 @@ export const AppContextProvider: React.FC = ({ children }) => {
             }
         });
 
+        window.api.onProjectLoad((project) => {
+            if (_isMounted) {
+                setAppState((old) => (old ? { ...old, project } : undefined));
+            }
+        });
+
         return () => {
             _isMounted = false;
         };

@@ -35,6 +35,12 @@ const api: Api = {
         ipcRenderer.on("success", (_, type) => onSuccess(type));
         ipcRenderer.on("error", (_, type, errorText) => onError(type, errorText));
     },
+    openProject: () => {
+        ipcRenderer.send("openProject");
+    },
+    onProjectLoad: (callback) => {
+        ipcRenderer.on("projectLoad", (_, project) => callback(project));
+    },
 };
 
 contextBridge.exposeInMainWorld("api", api);
