@@ -1,14 +1,16 @@
 import { writeFile } from "fs";
 
-import { BrowserWindow, ipcMain } from "electron";
+import { BrowserWindow } from "electron";
 import invariant from "tiny-invariant";
 
 import { AppConfig, AppState, NotificationType } from "src/shared/api";
 import { close } from "./api/close";
 import { createProject } from "./api/createProject";
+import { exit } from "./api/exit";
 import { exportData } from "./api/exportData";
 import { minimize } from "./api/minimize";
 import { onMaximize } from "./api/onMaximize";
+import { openGithubRepo } from "./api/openGithubRepo";
 import { openProject } from "./api/openProject";
 import { pickExportFile } from "./api/pickExportFile";
 import { pickFolder } from "./api/pickFolder";
@@ -32,6 +34,8 @@ const apiFunctionInitializers = [
     openProject,
     exportData,
     pickExportFile,
+    openGithubRepo,
+    exit,
 ];
 
 const defaultConfig: AppConfig = {};

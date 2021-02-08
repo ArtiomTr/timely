@@ -37,7 +37,7 @@ export const NewProjectForm = () => {
         onSubmit: ({ folder, title }) => window.api.createProject(folder, title),
     });
 
-    const { setFieldValue, setFieldError, errors } = formikBag;
+    const { setFieldValue, setFieldError, resetForm, errors } = formikBag;
 
     const { subscribeToError, subscribeToSuccess } = useCallbackContext();
 
@@ -61,10 +61,11 @@ export const NewProjectForm = () => {
         () =>
             subscribeToSuccess((type) => {
                 if (type === NotificationType.NEW_PROJECT) {
+                    resetForm();
                     dismiss();
                 }
             }),
-        [dismiss, subscribeToSuccess]
+        [dismiss, resetForm, subscribeToSuccess]
     );
 
     return (

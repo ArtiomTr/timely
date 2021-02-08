@@ -5,6 +5,10 @@ body {
     overflow: hidden;
 }
 
+div {
+    outline: none;
+}
+
 button {
     background-color: transparent;
     color: inherit;

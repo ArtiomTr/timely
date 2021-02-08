@@ -113,7 +113,7 @@ export const ExportForm = () => {
         },
     });
 
-    const { errors, values, setFieldValue, setFieldError } = formikBag;
+    const { errors, values, resetForm, setFieldValue, setFieldError } = formikBag;
 
     const [visible, , dismiss] = usePopup(ExportFormID);
 
@@ -139,10 +139,11 @@ export const ExportForm = () => {
         () =>
             subscribeToSuccess((type) => {
                 if (type === NotificationType.EXPORT) {
+                    resetForm();
                     dismiss();
                 }
             }),
-        [dismiss, subscribeToSuccess]
+        [dismiss, resetForm, subscribeToSuccess]
     );
 
     return (
@@ -179,7 +180,11 @@ export const ExportForm = () => {
                                 }}
                             >
                                 <Item title="Month" key="0">
-                                    <Content>
+                                    <Content
+                                        UNSAFE_style={{
+                                            outline: "none",
+                                        }}
+                                    >
                                         <MonthField
                                             isRequired
                                             width="100%"

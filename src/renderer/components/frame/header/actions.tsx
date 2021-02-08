@@ -6,12 +6,11 @@ import Branch1 from "@spectrum-icons/workflow/Branch1";
 import FolderOpen from "@spectrum-icons/workflow/FolderOpen";
 import Info from "@spectrum-icons/workflow/Info";
 import LogOut from "@spectrum-icons/workflow/LogOut";
-import Search from "@spectrum-icons/workflow/Search";
-import Settings from "@spectrum-icons/workflow/Settings";
 
 import { Action } from "./MenuBarAction";
 import { ExportFormID } from "../../forms/ExportForm";
 import { NewProjectFormID } from "../../forms/NewProjectForm";
+import { ProgramInfoID } from "../../ProgramInfo";
 
 export const actions: Array<Action> = [
     {
@@ -40,18 +39,9 @@ export const actions: Array<Action> = [
             {
                 subactions: [
                     {
-                        title: "Settings",
-                        icon: <Settings size="S" />,
-                        execute: () => {
-                            console.log("settings");
-                        },
-                    },
-                    {
                         title: "Exit",
                         icon: <LogOut size="S" />,
-                        execute: () => {
-                            console.log("exit");
-                        },
+                        execute: () => window.api.exit(),
                     },
                 ],
             },
@@ -61,32 +51,17 @@ export const actions: Array<Action> = [
         title: "Help",
         groups: [
             {
-                subactions: [
-                    {
-                        title: "Search",
-                        icon: <Search size="S" />,
-                        execute: () => {
-                            console.log("search");
-                        },
-                    },
-                ],
-            },
-            {
                 title: "About",
                 subactions: [
                     {
                         title: "GitHub repo",
                         icon: <Branch1 size="S" />,
-                        execute: () => {
-                            console.log("github");
-                        },
+                        execute: () => window.api.openGithubRepo(),
                     },
                     {
                         title: "Program info",
                         icon: <Info size="S" />,
-                        execute: () => {
-                            console.log("info");
-                        },
+                        execute: () => window.openPopup(ProgramInfoID),
                     },
                 ],
             },

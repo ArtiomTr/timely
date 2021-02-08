@@ -50,6 +50,12 @@ const api: Api = {
     onExportFilePicked: (callback) => {
         ipcRenderer.on("onExportFilePicked", (_, path) => callback(path));
     },
+    openGithubRepo: () => {
+        ipcRenderer.send("openGithubRepo");
+    },
+    exit: () => {
+        ipcRenderer.send("exit");
+    },
 };
 
 contextBridge.exposeInMainWorld("api", api);

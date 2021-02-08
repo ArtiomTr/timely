@@ -17,6 +17,8 @@ export interface Api {
     openProject: () => void;
     onProjectLoad: (callback: (project: Project) => void) => void;
     exportData: (path: string, from: number, to: number, type: ExportType) => void;
+    openGithubRepo: () => void;
+    exit: () => void;
 }
 
 export type AppConfig = {
