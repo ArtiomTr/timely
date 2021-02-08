@@ -25,7 +25,7 @@ export const ProgramInfo = () => {
                 <Divider />
                 <Content>
                     <Flex direction="column">
-                        <Text>Version: 0.0.1</Text>
+                        <Text>Version: 0.1.0</Text>
                         <Text>Built with Electron.</Text>
                         <Text>Copyright Artiom Tretjakovas {new Date().getFullYear()}</Text>
                     </Flex>

@@ -11,13 +11,13 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
  * }}
  * @returns {import('webpack').Configuration}
  */
-const createConfig = ({ entrypoint, output, target, plugins, isDev }) => ({
+const createConfig = ({ entrypoint, output, target, plugins = [], isDev }) => ({
     target,
     devtool: isDev && "source-map",
     mode: isDev ? "development" : "production",
     output: {
         path: path.join(__dirname, "dist"),
-        filename: output || (isDev ? "[name].bundle.js" : "[name].[contenthash].js"),
+        filename: output || "[name].bundle.js",
     },
     entry: {
         [path.parse(entrypoint).name]: entrypoint,
@@ -86,7 +86,7 @@ const createConfig = ({ entrypoint, output, target, plugins, isDev }) => ({
             },
         ],
     },
-    plugins: plugins && plugins.filter(Boolean),
+    plugins: [isDev === false && new MiniCssExtractPlugin(), ...plugins].filter(Boolean),
 });
 
 module.exports = createConfig;
