@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer } from "electron";
 
-import type { Api, DayActivity } from "src/shared/api";
+import type { Api, DayActivity, ExportType } from "src/shared/api";
 
 const api: Api = {
     closeWindow: () => {
@@ -40,6 +40,15 @@ const api: Api = {
     },
     onProjectLoad: (callback) => {
         ipcRenderer.on("projectLoad", (_, project) => callback(project));
+    },
+    exportData: (path, from, to, format) => {
+        ipcRenderer.send("exportData", path, from, to, format);
+    },
+    pickExportFile: (type: ExportType) => {
+        ipcRenderer.send("pickExportFile", type);
+    },
+    onExportFilePicked: (callback) => {
+        ipcRenderer.on("onExportFilePicked", (_, path) => callback(path));
     },
 };
 

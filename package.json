@@ -49,15 +49,19 @@
     },
     "dependencies": {
         "@adobe/react-spectrum": "^3.7.0",
+        "@react-spectrum/tabs": "^3.0.0-alpha.3",
         "@spectrum-icons/workflow": "^3.2.0",
         "clsx": "^1.1.1",
         "formik": "^2.2.6",
+        "json-as-xlsx": "^1.1.8",
+        "json2xls": "^0.1.2",
         "lodash": "^4.17.20",
         "moment": "^2.29.1",
         "moment-timezone": "^0.5.32",
         "react": "^16.8.0",
         "react-dom": "^16.8.0",
         "tiny-invariant": "^1.1.0",
+        "xlsx": "^0.16.9",
         "yup": "^0.32.8"
     }
 }

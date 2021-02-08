@@ -21,7 +21,7 @@ import { ErrorMessage } from "../ErrorMessage";
 import { TextField } from "../fields/TextField";
 import { usePopup } from "../PopupContext";
 
-export const NewProjectID = "new-project";
+export const NewProjectFormID = "new-project-form";
 
 export const NewProjectForm = () => {
     const formikBag = useFormik({
@@ -41,7 +41,7 @@ export const NewProjectForm = () => {
 
     const { subscribeToError, subscribeToSuccess } = useCallbackContext();
 
-    const [isOpen, , dismiss] = usePopup(NewProjectID);
+    const [isOpen, , dismiss] = usePopup(NewProjectFormID);
 
     useEffect(() => {
         window.api.subscribeToFolderPicken((folder) => setFieldValue("folder", folder));

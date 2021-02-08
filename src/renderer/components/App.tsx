@@ -2,6 +2,7 @@ import React from "react";
 
 import { darkTheme, Provider, View } from "@adobe/react-spectrum";
 
+import { ExportForm } from "./forms/ExportForm";
 import { NewProjectForm } from "./forms/NewProjectForm";
 import { Frame } from "./frame/Frame";
 import { CalendarRoute, CalendarRouteID } from "./routes/CalendarRoute";
@@ -21,6 +22,7 @@ export const App = () => (
                 <PopupProvider>
                     <StopwatchProvider>
                         <NewProjectForm />
+                        <ExportForm />
                         <Router defaultRoute={CalendarRouteID}>
                             <Frame>
                                 <View paddingX={20} paddingY={10}>

@@ -1,10 +1,8 @@
 import React from "react";
 
 import Add from "@spectrum-icons/workflow/Add";
+import BoxExport from "@spectrum-icons/workflow/BoxExport";
 import Branch1 from "@spectrum-icons/workflow/Branch1";
-import FileCSV from "@spectrum-icons/workflow/FileCsv";
-import FileData from "@spectrum-icons/workflow/FileData";
-import FileJson from "@spectrum-icons/workflow/FileJson";
 import FolderOpen from "@spectrum-icons/workflow/FolderOpen";
 import Info from "@spectrum-icons/workflow/Info";
 import LogOut from "@spectrum-icons/workflow/LogOut";
@@ -12,7 +10,8 @@ import Search from "@spectrum-icons/workflow/Search";
 import Settings from "@spectrum-icons/workflow/Settings";
 
 import { Action } from "./MenuBarAction";
-import { NewProjectID } from "../../forms/NewProjectForm";
+import { ExportFormID } from "../../forms/ExportForm";
+import { NewProjectFormID } from "../../forms/NewProjectForm";
 
 export const actions: Array<Action> = [
     {
@@ -24,38 +23,17 @@ export const actions: Array<Action> = [
                     {
                         title: "Create new project",
                         icon: <Add size="S" />,
-                        execute: () => window.openPopup(NewProjectID),
+                        execute: () => window.openPopup(NewProjectFormID),
                     },
                     {
                         title: "Open project",
                         icon: <FolderOpen size="S" />,
                         execute: () => window.api.openProject(),
                     },
-                ],
-            },
-            {
-                title: "Export",
-                subactions: [
                     {
-                        title: "Export as JSON",
-                        icon: <FileJson size="S" />,
-                        execute: () => {
-                            console.log("json");
-                        },
-                    },
-                    {
-                        title: "Export as CSV",
-                        icon: <FileCSV size="S" />,
-                        execute: () => {
-                            console.log("csv");
-                        },
-                    },
-                    {
-                        title: "Export to Excel",
-                        icon: <FileData size="S" />,
-                        execute: () => {
-                            console.log("excel");
-                        },
+                        title: "Export",
+                        icon: <BoxExport size="S" />,
+                        execute: () => window.openPopup(ExportFormID),
                     },
                 ],
             },

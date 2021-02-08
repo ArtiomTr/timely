@@ -7,6 +7,8 @@ export interface Api {
     setDayActivity: (day: number, activity: DayActivity) => void;
     pickFolder: () => void;
     subscribeToFolderPicken: (callback: (folder: string) => void) => void;
+    pickExportFile: (type: ExportType) => void;
+    onExportFilePicked: (callback: (path: string) => void) => void;
     createProject: (path: string, title: string) => void;
     subscribeToNotifications: (
         onSuccess: (type: NotificationType) => void,
@@ -14,6 +16,7 @@ export interface Api {
     ) => void;
     openProject: () => void;
     onProjectLoad: (callback: (project: Project) => void) => void;
+    exportData: (path: string, from: number, to: number, type: ExportType) => void;
 }
 
 export type AppConfig = {
@@ -37,5 +40,12 @@ export type AppState = {
 
 export enum NotificationType {
     NEW_PROJECT,
+    EXPORT,
     GENERAL,
+}
+
+export enum ExportType {
+    JSON,
+    CSV,
+    XLS,
 }

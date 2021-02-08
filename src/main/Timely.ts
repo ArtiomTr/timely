@@ -6,9 +6,11 @@ import invariant from "tiny-invariant";
 import { AppConfig, AppState, NotificationType } from "src/shared/api";
 import { close } from "./api/close";
 import { createProject } from "./api/createProject";
+import { exportData } from "./api/exportData";
 import { minimize } from "./api/minimize";
 import { onMaximize } from "./api/onMaximize";
 import { openProject } from "./api/openProject";
+import { pickExportFile } from "./api/pickExportFile";
 import { pickFolder } from "./api/pickFolder";
 import { requestInitialAppState } from "./api/requestInitialAppState";
 import { setDayActivity } from "./api/setDayActivity";
@@ -28,6 +30,8 @@ const apiFunctionInitializers = [
     pickFolder,
     createProject,
     openProject,
+    exportData,
+    pickExportFile,
 ];
 
 const defaultConfig: AppConfig = {};
